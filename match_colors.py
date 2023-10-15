@@ -1,12 +1,12 @@
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-from patterns import complement, monochrome
-from converting import rgb2hex, hex2rgb
+from patterns import complement
+from converting import rgb2hex, hex2rgb, rgb2hsv
 from pathlib import Path
 def generate_color():
     return tuple(np.random.choice(range(256), size=3))
 
-def is_significant(color1, color2, tolerance=15):
+def is_significant_rgb(color1, color2, tolerance=15):
     r1, g1, b1 = color1
     color2_orig = complement(r1, g1, b1)
     r2, g2, b2 = color2
@@ -15,11 +15,24 @@ def is_significant(color1, color2, tolerance=15):
     over_tolerance = [np.abs(x[0] - x[1]) > tolerance for x in [(r1, r2), (g1, g2), (b1, b2)]]
     return any(over_tolerance)
 
+def is_significant_hsv(color1, color2, tolerance=(15, 15, 15)):
+    r1, g1, b1 = color1
+    color2_orig = complement(r1, g1, b1)
+
+    h2, s2, v2 = rgb2hsv(*color2)
+    h1, s1, v1 = rgb2hsv(*color2_orig)
+
+    pairs = [(h1, h2), (s1, s2), (v1, v2)]
+    over_tolerance = [np.abs(pairs[i][0] - pairs[i][1]) > tolerance[i] for i in range(len(pairs))]
+    return any(over_tolerance)
 
 
-def plot_difference(color, pattern_func, difference, path):
+
+def plot_difference(color, pattern_func, difference, is_significant=is_significant_rgb, path='./'):
     # Rozmiar obrazu
-    width = 400
+    r, g, b = "R", "G", "B"
+    tolerance = 20
+    width = 500
     height = 500
 
     # Inicjalizacja obrazu
@@ -62,8 +75,15 @@ def plot_difference(color, pattern_func, difference, path):
     draw.rectangle([x3, y3, x3 + size3, y3 + size3], fill=color)
     draw.rectangle([x4, y4, x4 + size4, y4 + size4], fill=color2)
 
+    if is_significant.__name__ == 'is_significant_hsv':
+        r, g, b = "H", "S", "V"
+        col2 = rgb2hsv(*color2)
+        col2_orig = rgb2hsv(*color2_orig)
+        difference = [col2_orig[i] - col2[i] for i in range(3)]
+        tolerance = (60, 40, 40)
+
     # Dodawanie napisu o różnicy kolorów
-    text = f"Difference (R, G, B): {difference}. Over tolerance: {is_significant(color2_orig, color2)}"
+    text = f"Difference ({r, g, b}): {difference}. Over tolerance: {is_significant(color1, color2, tolerance)}"
     draw.text((10, 250), text, fill="white", font=ImageFont.truetype(font='./arial.ttf', size=16))
 
     # # Zapis obrazu
@@ -89,11 +109,12 @@ def main():
     for i, diff in enumerate(diffs):
 
         path = directory / f"{i}.png"
-        plot_difference(color1, complement, diff, path)
+        plot_difference(color1, complement, diff, is_significant_hsv, path)
 
 
 if __name__ == '__main__':
-    color1 = hex2rgb("#a96842")
-    color2 = hex2rgb("#253754")
-    print(is_significant(color1, color2, 80))
+    color1 = hex2rgb("#ad4442")
+    color2 = hex2rgb("#316643")
+    print(is_significant_rgb(color1, color2, 80))
+    print(is_significant_hsv(color1, color2, (60, 40, 40)))
     # main()

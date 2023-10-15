@@ -1,5 +1,6 @@
 import numpy as np
 from random import randint
+from converting import hex2rgb
 
 def decide_if_monochromatic(avarage_values: list[np.array]) -> bool:
     """
