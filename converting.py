@@ -48,7 +48,7 @@ def rgb2hsv(r, g, b):
     return tuple(map(round, (h, s, v)))
 
 
-def hex2rgb(hex_value) :
+def hex2rgb(hex_value):
     h = hex_value.strip("#")
     rgb = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
     return rgb
