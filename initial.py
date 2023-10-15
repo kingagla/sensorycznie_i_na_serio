@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+import os
 
 
 def localize_objects(path: str) -> dict:
@@ -27,7 +28,7 @@ def localize_objects(path: str) -> dict:
             print(f" - ({vertex.x}, {vertex.y})")
             x, y = vertex.x, vertex.y
             vertices.append([x, y])
-        dict_of_vertices[f"{object_.name}output.jpg"] = vertices
+        dict_of_vertices[f"{object_.name}.jpg"] = vertices
 
     return dict_of_vertices
 
@@ -40,21 +41,28 @@ def crop_and_save_object(path: str, dict_of_vertices: dict):
     :return:
     """
     for key, value in dict_of_vertices.items():
+        input_image_name = os.path.splitext(os.path.basename(path))[0]
+        output_folder = os.path.join("images/outputs", f"{input_image_name}_output")
+        os.makedirs(output_folder, exist_ok=True)
         image = cv2.imread(path)
         image_height, image_width = image.shape[:2]
         pixel_vertices = np.round(np.array(value) * np.array([image_width, image_height]))
         x, y, w, h = cv2.boundingRect(pixel_vertices.astype(int))
         cropped_image = image[y:y + h, x:x + w]
-        cv2.imwrite(f"{key}", cropped_image)
+        output_file = os.path.join(output_folder, key)
+        cv2.imwrite(output_file, cropped_image)
 
 
 def main():
-    path = "test.png"
-    dict_of_vertices = localize_objects(path)
-    crop_and_save_object(path, dict_of_vertices)
+    file_name = "test.png"
+    folder_name = "images/inputs"
+    folder_path = os.path.join(os.getcwd(), folder_name)
+    file_list = os.listdir(folder_path)
+    for file in file_list:
+        file_path = os.path.join(folder_path, file)
+        dict_of_vertices = localize_objects(file_path)
+        crop_and_save_object(file_path, dict_of_vertices)
 
 
 if __name__ == main():
     main()
-
-
