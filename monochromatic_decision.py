@@ -31,61 +31,62 @@ def validate(number: int) -> int:
         return 255
     return number
 
-for i in range(5):
-    test_r = randint(-30, 30)
-    test_g = randint(-30, 30)
-    test_b = randint(-30, 30)
-    x = np.array([randint(1, 255),randint(1, 255), randint(1, 255)])
+
+if __name__ == "__main__":
+    for i in range(5):
+        test_r = randint(-30, 30)
+        test_g = randint(-30, 30)
+        test_b = randint(-30, 30)
+        x = np.array([randint(1, 255),randint(1, 255), randint(1, 255)])
+
+        input = [x, np.array([validate(x[0]+test_r), validate(x[1]+test_g), validate(x[2]+test_b)])]
+
+        output = decide_if_monochromatic(input)
+
+        print(output, "--", x, input[1])
+
+        import numpy as np
+        from PIL import Image, ImageDraw
+        from patterns import complement
+
+        def generate_color():
+            return tuple(x)
+
+        # Rozmiar obrazu
+        width = 400
+        height = 200
+
+        # Inicjalizacja obrazu
+        image = Image.new("RGB", (width, height))
+        draw = ImageDraw.Draw(image)
+
+        # Kolor kwadratu 1
+        color1 = tuple(x)
+        color2 = tuple(input[1].astype(int))
+
+        # Kolor kwadratu 2
 
 
-    input = [x, np.array([validate(x[0]+test_r), validate(x[1]+test_g), validate(x[2]+test_b)])]
 
-    output = decide_if_monochromatic(input)
+        # Wymiary i pozycja kwadratu 1
+        x1 = 0
+        y1 = 0
+        size1 = 200
 
-    print(output, "--", x, input[1])
+        # Wymiary i pozycja kwadratu 2
+        x2 = 200
+        y2 = 0
+        size2 = 200
 
-    import numpy as np
-    from PIL import Image, ImageDraw
-    from patterns import complement
+        # Rysowanie kwadratów
+        #draw.text(xy=(0,0))
+        draw.rectangle([x1, y1, x1 + size1, y1 + size1], fill=color1)
+        draw.rectangle([x2, y2, x2 + size2, y2 + size2], fill=color2)
 
-    def generate_color():
-        return tuple(x)
+        #draw.rectangle([x2, y2, x2 + size2, y2 + size2], fill=color2)
 
-    # Rozmiar obrazu
-    width = 400
-    height = 200
-
-    # Inicjalizacja obrazu
-    image = Image.new("RGB", (width, height))
-    draw = ImageDraw.Draw(image)
-
-    # Kolor kwadratu 1
-    color1 = tuple(x)
-    color2 = tuple(input[1].astype(int))
-
-    # Kolor kwadratu 2
-
-
-
-    # Wymiary i pozycja kwadratu 1
-    x1 = 0
-    y1 = 0
-    size1 = 200
-
-    # Wymiary i pozycja kwadratu 2
-    x2 = 200
-    y2 = 0
-    size2 = 200
-
-    # Rysowanie kwadratów
-    #draw.text(xy=(0,0))
-    draw.rectangle([x1, y1, x1 + size1, y1 + size1], fill=color1)
-    draw.rectangle([x2, y2, x2 + size2, y2 + size2], fill=color2)
-
-    #draw.rectangle([x2, y2, x2 + size2, y2 + size2], fill=color2)
-
-    # Zapis obrazu
-    
-    # Wyświetlenie obrazu
-    image.show()
-    image.close()
+        # Zapis obrazu
+        
+        # Wyświetlenie obrazu
+        image.show()
+        image.close()
