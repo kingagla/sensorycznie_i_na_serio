@@ -22,5 +22,5 @@ def localize_objects(path):
         for vertex in object_.bounding_poly.normalized_vertices:
             print(f" - ({vertex.x}, {vertex.y})")
 
-path = "/Users/mstopins/Desktop/sandbox3/smart_cas.png"
+path = "/Users/mstopins/Desktop/sensorycznie_i_na_serio/Jeans.jpg"
 localize_objects(path)
