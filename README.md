@@ -10,5 +10,6 @@ also anyone who has difficulty with choosing suitable colors.
 We based this system on computer vision models available in the Google Cloud Vision API and by following color 
 combination schemes such as complementary and monochromatic.
 
+- Project presentation: https://github.com/kingagla/sensorycznie_i_na_serio/blob/main/doc/Sensorycznie%20i%20na%20serio.pdf
 - Figma file: https://www.figma.com/file/Ez42KsEsJcQrdHMhQm7lek/Sensorycznie?type=design&node-id=0-1&mode=design&t=rk1a6GODzCq3roSm-0
 - Figma prototype: https://www.figma.com/proto/Ez42KsEsJcQrdHMhQm7lek/Sensorycznie?page-id=0%3A1&type=design&node-id=5-3423&viewport=791%2C208%2C0.03&t=K2J4Ze56ptdfEXYP-1&scaling=scale-down&starting-point-node-id=5%3A3423&fbclid=IwAR0tDKSYrrVhn-6fXr0ugFQ0HzGqh5t1adILucHZU6kItXSlhq77YcaS-AM
