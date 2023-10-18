@@ -1,5 +1,6 @@
 import numpy as np
 from random import randint
+from converting import hex2rgb
 
 def decide_if_monochromatic(avarage_values: list[np.array]) -> bool:
     """
@@ -85,8 +86,10 @@ if __name__ == "__main__":
 
         #draw.rectangle([x2, y2, x2 + size2, y2 + size2], fill=color2)
 
+
         # Zapis obrazu
-        
+
         # Wyświetlenie obrazu
-        image.show()
+        # image.show()
         image.close()
+
