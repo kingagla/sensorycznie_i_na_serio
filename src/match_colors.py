@@ -1,6 +1,6 @@
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-from patterns import complement
+from src.patterns import complement
 from src.converting import rgb2hex, hex2rgb, rgb2hsv
 from pathlib import Path
 def generate_color():
