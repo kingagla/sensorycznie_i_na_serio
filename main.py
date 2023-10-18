@@ -1,8 +1,8 @@
 import os
-from initial import localize_objects, crop_and_save_object
-from dominant_color import detect_dominant_color
-from match_colors import check_complementary
-from monochromatic_decision import decide_if_monochromatic
+from src.initial import localize_objects, crop_and_save_object
+from src.dominant_color import detect_dominant_color
+from src.match_colors import check_complementary
+from src.monochromatic_decision import decide_if_monochromatic
 import json
 
 def main():

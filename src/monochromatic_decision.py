@@ -1,6 +1,6 @@
 import numpy as np
 from random import randint
-from converting import hex2rgb
+
 
 def decide_if_monochromatic(avarage_values: list[np.array]) -> bool:
     """
@@ -47,7 +47,7 @@ for i in range(5):
 
     import numpy as np
     from PIL import Image, ImageDraw
-    from patterns import complement
+
 
     def generate_color():
         return tuple(x)
