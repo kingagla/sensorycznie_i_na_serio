@@ -52,4 +52,3 @@ def crop_and_save_object(path: str, dict_of_vertices: dict):
         output_file = os.path.join(output_folder, key)
         cv2.imwrite(output_file, cropped_image)
 
-
