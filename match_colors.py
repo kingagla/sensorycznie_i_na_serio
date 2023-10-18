@@ -15,7 +15,7 @@ def is_significant_rgb(color1, color2, tolerance=15):
     over_tolerance = [np.abs(x[0] - x[1]) > tolerance for x in [(r1, r2), (g1, g2), (b1, b2)]]
     return any(over_tolerance)
 
-def is_significant_hsv(color1, color2, tolerance=(15, 15, 15)):
+def check_complementary(color1, color2, tolerance=(15, 15, 15)):
     r1, g1, b1 = color1
     color2_orig = complement(r1, g1, b1)
 
@@ -23,8 +23,8 @@ def is_significant_hsv(color1, color2, tolerance=(15, 15, 15)):
     h1, s1, v1 = rgb2hsv(*color2_orig)
 
     pairs = [(h1, h2), (s1, s2), (v1, v2)]
-    over_tolerance = [np.abs(pairs[i][0] - pairs[i][1]) > tolerance[i] for i in range(len(pairs))]
-    return any(over_tolerance)
+    below_tolerance = [np.abs(pairs[i][0] - pairs[i][1]) <= tolerance[i] for i in range(len(pairs))]
+    return any(below_tolerance)
 
 
 
@@ -109,12 +109,12 @@ def main():
     for i, diff in enumerate(diffs):
 
         path = directory / f"{i}.png"
-        plot_difference(color1, complement, diff, is_significant_hsv, path)
+        plot_difference(color1, complement, diff, check_complementary, path)
 
 
 if __name__ == '__main__':
     color1 = hex2rgb("#ad4442")
     color2 = hex2rgb("#316643")
     print(is_significant_rgb(color1, color2, 80))
-    print(is_significant_hsv(color1, color2, (60, 40, 40)))
+    print(check_complementary(color1, color2, (60, 40, 40)))
     # main()

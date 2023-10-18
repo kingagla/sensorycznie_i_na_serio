@@ -88,5 +88,5 @@ for i in range(5):
     # Zapis obrazu
     
     # Wyświetlenie obrazu
-    image.show()
+    # image.show()
     image.close()
