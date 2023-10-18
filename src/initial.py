@@ -42,7 +42,7 @@ def crop_and_save_object(path: str, dict_of_vertices: dict):
     """
     for key, value in dict_of_vertices.items():
         input_image_name = os.path.splitext(os.path.basename(path))[0]
-        output_folder = os.path.join("images/outputs", f"{input_image_name}_output")
+        output_folder = os.path.join("../images/outputs", f"{input_image_name}_output")
         os.makedirs(output_folder, exist_ok=True)
         image = cv2.imread(path)
         image_height, image_width = image.shape[:2]

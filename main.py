@@ -1,8 +1,8 @@
 import os
-from initial import localize_objects, crop_and_save_object
-from dominant_color import detect_dominant_color
-from match_colors import check_complementary
-from monochromatic_decision import decide_if_monochromatic
+from src.initial import localize_objects, crop_and_save_object
+from src.dominant_color import detect_dominant_color
+from src.match_colors import check_complementary
+from src.monochromatic_decision import decide_if_monochromatic
 import json
 
 def main():
@@ -17,7 +17,7 @@ def main():
 
     folder_name = "images/outputs/test_Michal_2_output"
     folder_path = os.path.join(os.getcwd(), folder_name)
-    file_list = os.listdir(folder_path)
+    file_list = [item for item in os.listdir(folder_path) if item.endswith("jpg")]
     for file in file_list:
         file_path = os.path.join(folder_path, file)
         colors[file_path] = detect_dominant_color(file_path)
@@ -29,7 +29,7 @@ def main():
 
     wear_types['monochromatic'] = decide_if_monochromatic([clothes["Pants"], clothes["Outerwear"]])
 
-    with open(os.path.join(folder_name, "output.json"), 'w') as f:
+    with open(os.path.join(folder_name, "output2.json"), 'w') as f:
         json.dump(wear_types, f)
 
 

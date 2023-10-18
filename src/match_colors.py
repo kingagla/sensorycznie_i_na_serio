@@ -1,7 +1,7 @@
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-from patterns import complement
-from converting import rgb2hex, hex2rgb, rgb2hsv
+from src.patterns import complement
+from src.converting import rgb2hex, hex2rgb, rgb2hsv
 from pathlib import Path
 def generate_color():
     return tuple(np.random.choice(range(256), size=3))
