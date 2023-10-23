@@ -3,7 +3,7 @@
 This project is our work prepared as part of the Sensory and Seriously Hackathon, which took place in Krakow on the 14th 
 and 15th of October 2023. The project's goal was to create an application to assist visually impaired individuals in 
 checking their appearance just before leaving their homes. The full version of the application includes checking 
-details such as holes or stains on clothing. During approximately 30 hours of designing and coding, we implemented a system to 
+details such as holes or stains on clothing. During approximately 20 hours of designing and coding, we implemented a system to 
 evaluate whether colors match each other. This functionality will assist not only visually impaired individuals but 
 also anyone who has difficulty with choosing suitable colors.
 
